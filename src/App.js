@@ -3,7 +3,7 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [isChecked, setIsChecked] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const [buttonColor, setButtonColor] = useState("red");
   const newButtonColor = buttonColor === "red" ? "blue" : "red";
 
@@ -12,14 +12,16 @@ function App() {
       <button
         style={{ backgroundColor: buttonColor }}
         onClick={() => setButtonColor(newButtonColor)}
-        disabled={isChecked}
+        disabled={disabled}
       >
         Change to {newButtonColor}
       </button>
       <input
         type="checkbox"
-        onChange={() => setIsChecked(!isChecked)}
-        checked={isChecked}
+        id="enable-button-checkbox"
+        defaultChecked={disabled}
+        aria-checked={disabled}
+        onChange={(e) => setDisabled(e.target.checked)}
       />
     </div>
   );
